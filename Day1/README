@@ -1,0 +1,791 @@
+# Atlantic AI — Day 1 Practice Project
+
+## Project Overview
+
+This is my Day 1 practice project for the Atlantic AI project.
+
+The goal was to practice Python fundamentals by building a simple course-search bot that reads course information from a JSON file and allows the user to search for a course using its course code.
+
+---
+
+## What I Practiced
+
+- Python functions
+- Lists
+- Dictionaries
+- JSON
+- JSON file handling
+- Reading files with `open()`
+- `json.load()`
+- `for` loops
+- `if / elif / else`
+- User input with `input()`
+- String methods such as `.lower()`
+- Exception handling
+- `try` and `except`
+- `pathlib`
+- File paths
+- `Path(__file__)`
+- `.parent`
+- Joining paths using `/`
+- Basic debugging
+
+---
+
+## Project Structure
+
+```text
+Practice_for_Atlantic-AI/
+│
+└── D1/
+    ├── main.py
+    ├── courses.json
+    └── README.md
+
+
+🛠️ Problems I Encountered and How I Fixed Them
+
+1. NameError: name 'courses' is not defined
+
+Problem
+
+I got an error saying:
+
+NameError: name 'courses' is not defined
+
+I didn't immediately understand why.
+
+I had code later in the program like:
+
+for course in courses:
+
+But Python said that courses didn't exist.
+
+What I learned
+
+The problem wasn't necessarily the for loop.
+
+The variable courses was supposed to be created when I loaded the JSON file:
+
+courses = json.load(f)
+
+If Python couldn't find or load the JSON file correctly, that line wouldn't successfully create courses.
+
+Therefore, when the program reached:
+
+for course in courses:
+
+Python didn't know what courses was.
+
+Fix
+
+I used pathlib to create a reliable path to the JSON file:
+
+from pathlib import Path
+import json
+
+file_path = Path(__file__).parent / "courses.json"
+
+with open(file_path, "r") as f:
+    courses = json.load(f)
+
+
+---
+
+2. I Didn't Understand the File Path
+
+Problem
+
+My Python file and JSON file were inside the D1 folder, but I was running the project from the larger:
+
+Practice_for_Atlantic-AI/
+
+folder.
+
+This caused confusion about where Python was looking for:
+
+courses.json
+
+What I learned
+
+Python needs to know where a file is located.
+
+Just writing:
+
+open("courses.json")
+
+depends on the program's current working directory.
+
+The file might exist, but Python may be looking somewhere else.
+
+Fix
+
+I used:
+
+Path(__file__).parent
+
+This means:
+
+> Find the folder where this Python file is located.
+
+
+
+Then:
+
+Path(__file__).parent / "courses.json"
+
+means:
+
+> From the folder containing main.py, go to courses.json.
+
+
+
+I also changed my VS Code workspace so I was working directly inside the correct D1 folder.
+
+
+---
+
+3. I Confused Path and path
+
+Problem
+
+I accidentally wrote something similar to:
+
+path(...)
+
+when I had imported:
+
+from pathlib import Path
+
+Python is case-sensitive.
+
+What I learned
+
+These are different names:
+
+Path
+path
+PATH
+
+Python treats them as different.
+
+Fix
+
+I used the exact name:
+
+Path
+
+Example:
+
+file_path = Path(__file__).parent / "courses.json"
+
+Lesson
+
+Python is case-sensitive.
+
+Capitalization matters.
+
+
+---
+
+4. I Forgot the Quotation Marks Around the Filename
+
+Problem
+
+I initially had a filename without quotation marks.
+
+For example, I needed:
+
+"courses.json"
+
+but I had written it without treating it as a string.
+
+What I learned
+
+A filename is text, so Python needs it represented as a string.
+
+Correct:
+
+"courses.json"
+
+Not:
+
+courses.json
+
+Fix
+
+I added quotation marks:
+
+Path(__file__).parent / "courses.json"
+
+
+---
+
+5. I Put the else Inside the for Loop
+
+Problem
+
+I originally wrote something like:
+
+for course in courses:
+    if course["code"] == user_input:
+        return course
+    else:
+        return "Course not available"
+
+This looked logical at first, but it was wrong.
+
+Why?
+
+Suppose the first course is:
+
+CSC101
+
+and I search for:
+
+PHY101
+
+Python checks the first course:
+
+CSC101 == PHY101
+
+That's false.
+
+So the else immediately runs:
+
+return "Course not available"
+
+The program stops searching.
+
+It never gets the chance to check the next courses.
+
+Fix
+
+I moved the final return outside the loop:
+
+for course in courses:
+    if course["code"] == user_input:
+        return course
+
+return "Course not available"
+
+What I learned
+
+The loop should search through all the courses first.
+
+Only AFTER the loop finishes without finding a match should the program say:
+
+Course not available
+
+This was an important lesson about how return works inside loops.
+
+
+---
+
+6. I Forgot to Print the Result of a Function
+
+Problem
+
+My function returned an answer, but I wasn't seeing the answer on the screen.
+
+I had something like:
+
+answer(user_input)
+
+What I learned
+
+Calling a function that returns a value doesn't automatically display that value.
+
+For example:
+
+def answer():
+    return "Hello"
+
+If I do:
+
+answer()
+
+the function returns "Hello", but my program may not display it.
+
+Fix
+
+I used:
+
+print(answer(user_input))
+
+Now the returned value is displayed.
+
+Lesson
+
+return sends a value back.
+
+print() displays something to the user.
+
+They are not the same thing.
+
+
+---
+
+7. I Used Too Many while Loops
+
+Problem
+
+When I wanted my program to allow the user to search multiple times, I started putting multiple while loops inside each other.
+
+This made the program more complicated than necessary.
+
+What I learned
+
+I don't always need a new while loop for every decision.
+
+One main loop can control the entire interaction.
+
+For example:
+
+while True:
+    user_input = input("Enter course code: ")
+
+    print(answer(user_input))
+
+    again = input("Search again? (yes/no): ")
+
+    if again.lower() == "no":
+        break
+
+The while True keeps the program running.
+
+The break stops it when the user wants to leave.
+
+Lesson
+
+Don't add loops just because something needs to repeat.
+
+First ask:
+
+> What exactly needs to repeat?
+
+
+
+Then create one loop that handles that repetition.
+
+
+---
+
+8. I Was Confused About Where to Put if, else, and Loops
+
+While building the project, I sometimes wasn't sure whether an if, else, or while should be inside or outside another block.
+
+This helped me understand that indentation in Python isn't just formatting.
+
+Indentation controls the structure of the program.
+
+For example:
+
+for course in courses:
+    if course["code"] == user_input:
+        return course
+
+return "Course not available"
+
+The final return is outside the loop because it should only happen after every course has been checked.
+
+
+---
+
+9. I Learned That a Path Does Not Open a File
+
+I initially had some confusion about this:
+
+Path(__file__).parent / "courses.json"
+
+What I learned
+
+This creates a path.
+
+It doesn't automatically open the file.
+
+For example:
+
+file_path = Path(__file__).parent / "courses.json"
+
+means:
+
+> Create a reference to where courses.json is located.
+
+
+
+Then:
+
+open(file_path, "r")
+
+opens the file.
+
+And:
+
+json.load(f)
+
+reads the JSON data and converts it into Python data.
+
+So the process is:
+
+Path
+ ↓
+Find the file location
+ ↓
+open()
+ ↓
+Open the file
+ ↓
+json.load()
+ ↓
+Load the data into Python
+
+
+---
+
+10. I Learned the Difference Between pathlib and os
+
+I also learned that pathlib and os can both interact with the operating system and filesystem, but they are used for different purposes.
+
+pathlib
+
+I mainly use it for working with paths:
+
+from pathlib import Path
+
+file_path = Path(__file__).parent / "courses.json"
+
+It can also do things like:
+
+file_path.exists()
+file_path.is_file()
+file_path.is_dir()
+
+os
+
+os provides broader operating-system functionality.
+
+For example:
+
+import os
+
+os.getcwd()
+os.listdir()
+os.getenv()
+
+I don't need to memorize the entire os module.
+
+I only need the parts that are useful for my current projects.
+
+
+---
+
+11. I Learned About Environment Variables
+
+I also learned that sensitive information such as API keys should not normally be written directly into code.
+
+For example, instead of:
+
+api_key = "MY_SECRET_KEY"
+
+a real project can use an environment variable:
+
+os.getenv("API_KEY")
+
+This is important because code may eventually be uploaded to GitHub.
+
+I also learned that .gitignore can be used to prevent files containing secrets from being committed to Git.
+
+
+---
+
+🐛 My Debugging Lessons
+
+The biggest lessons from this project were not just about making the program work.
+
+They were about learning how to debug.
+
+When I get an error, I should ask:
+
+1. What exactly is Python complaining about?
+
+
+2. Which line caused the error?
+
+
+3. What was Python expecting?
+
+
+4. What did I actually give it?
+
+
+5. Is the variable defined?
+
+
+6. Is the file in the correct location?
+
+
+7. Is the spelling and capitalization correct?
+
+
+8. Is my indentation correct?
+
+
+9. Is my loop doing what I think it is doing?
+
+
+10. Is my function returning a value or printing a value?
+
+
+
+
+---
+
+🧠 Important Python Lessons I Learned
+
+Variables
+
+A variable stores a value:
+
+courses = json.load(f)
+
+
+---
+
+Lists
+
+A list can store multiple items:
+
+courses = [
+    {...},
+    {...},
+    {...}
+]
+
+
+---
+
+Dictionaries
+
+A dictionary stores information using keys and values:
+
+course = {
+    "code": "CSC101",
+    "name": "Introduction to Computer Science"
+}
+
+I can access values using:
+
+course["code"]
+
+
+---
+
+Functions
+
+Functions allow me to organize reusable logic:
+
+def search(user_input):
+    ...
+
+
+---
+
+return
+
+return sends a value back from a function:
+
+return course
+
+
+---
+
+print()
+
+print() displays information:
+
+print(answer)
+
+
+---
+
+for Loops
+
+A for loop lets me go through items one by one:
+
+for course in courses:
+    ...
+
+
+---
+
+while Loops
+
+A while loop repeats something while a condition remains true.
+
+I used it to allow the user to continue searching.
+
+
+---
+
+JSON
+
+JSON allows structured data to be stored outside my Python code.
+
+Python can load the JSON:
+
+courses = json.load(f)
+
+
+---
+
+File Handling
+
+I learned how Python can open and read files:
+
+with open(file_path, "r") as f:
+    courses = json.load(f)
+
+
+---
+
+🔥 Biggest Lesson From Day 1
+
+The most important thing I learned was:
+
+> I don't need to write perfect code the first time.
+
+
+
+My first attempts had mistakes.
+
+I had problems with:
+
+File paths
+
+Folder structure
+
+Path
+
+Capitalization
+
+Strings
+
+JSON loading
+
+Variables
+
+for loops
+
+else
+
+return
+
+print()
+
+while loops
+
+Program structure
+
+Indentation
+
+
+But instead of just copying a solution, I worked through the problems and understood why they happened.
+
+That is how I want to learn programming.
+
+
+---
+
+🤖 What I Built
+
+I built a small course-search bot.
+
+The basic flow is:
+
+User
+ ↓
+Enter course code
+ ↓
+Python receives input
+ ↓
+Python searches courses.json
+ ↓
+Find matching course
+ ↓
+Return course information
+ ↓
+Display answer
+ ↓
+Ask whether user wants to search again
+
+
+---
+
+🚀 Connection to Atlantic AI
+
+This small project is connected to the bigger Atlantic AI project.
+
+The current project is:
+
+JSON
+ ↓
+Python
+ ↓
+Search
+ ↓
+Answer
+
+The future Atlantic AI system will become much more advanced:
+
+School Materials
+        ↓
+Documents
+        ↓
+Data Processing
+        ↓
+Information Retrieval
+        ↓
+Relevant Information
+        ↓
+AI Model
+        ↓
+Atlantic AI Response
+
+The current project is therefore a small foundation for the larger system.
+
+
+---
+
+📈 What I Want to Improve Next
+
+In future projects, I want to practice:
+
+More realistic datasets
+
+Better search
+
+Searching by multiple fields
+
+Reading multiple files
+
+Working with folders
+
+Handling errors properly
+
+More advanced Python
+
+APIs
+
+Databases
+
+AI models
+
+Document processing
+
+Retrieval
+
+Eventually RAG
+
+
+
