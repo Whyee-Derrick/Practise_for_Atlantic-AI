@@ -1,0 +1,21 @@
+[
+    {
+        "code":"CSC101",
+        "name": "Introduction to Computer Science",
+        "level": "100",
+        "semester": 1
+    },
+    {
+        "code": "MTH101",
+        "name": "Mathematics",
+        "level": "100",
+        "semester": 1
+    },
+    {
+        "code": "PHY101",
+        "name": "Physics",
+        "level": "100",
+        "semester": 1
+    }
+    
+]
