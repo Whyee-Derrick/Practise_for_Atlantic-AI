@@ -1,0 +1,31 @@
+What is program all about 
+
+A simple search program that answers question based on what is in the data in my json file it has the same idea as what i did in Day1 but with a different json data
+
+what I learnt to be able to work on this 
+
+Basically the same knowledge from day one 
+
+problems I encountered
+
+Basically not much because i had a solid knowledge from Day1 so this was actually very flawless.
+But my major problem was to make my program answer me when i put my topic name or keyword in a sentence form 
+eg; I want to ask my program: "What are loops" then it gives me respond but it wasn't working 
+Because i was actually making my code to just accept only the keyword or topic-name and just give me the answer 
+using this code :
+def search ( user_input ):
+    for item in data:
+        if data["topic"].lower() == user_input.lower() :
+            return data["content"]
+        else:
+            return "Not available." 
+
+what i learnt today 
+
+Instead of using "==" I should had used the keyword "in"
+this keyword is a membership operator keyword 
+it searches through the string the user will provide if the user types any topic (That exist in my json file) in the strings the user provide it detects it and return the content or answer to that particular topic-name.
+
+And the ".lower()" help the "in" keeyword to detect either upper or lower cased topic-name
+
+          
