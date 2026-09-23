@@ -1,0 +1,9 @@
+Program overview
+A small program that answers one question who is the best footballer in the world.
+
+Problems I encountered
+ollama was sending me deplicated json so i was having streaming error cause I didn't add this code:
+"stream" = False
+
+what I learnt 
+How to make request using ollama API

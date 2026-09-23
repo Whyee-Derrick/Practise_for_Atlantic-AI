@@ -1,0 +1,5 @@
+Science is a system of acquiring knoledge through observation and experimentation to describe and explain natural phenomena.
+
+Dictionaries in python is a series of key-value pair enclosed in a curly bracket. 
+
+Repository is a place where all the version of your file and their complete change history are stored. 

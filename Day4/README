@@ -1,0 +1,8 @@
+Program Overview 
+A small search program that allows you to Ask question and it will provide you with the answer and ask if you still have questions then you can choose option either (YES/NO)
+
+Problem I faced
+I didn't really face any challenge whiles doing this because of the knowledge I gain from the previouse days I really learnt;The only mistake i made was to print out "response" which contains unecessary info like status code etc. instead of printing (response["respond"]) which is the  actual key that contains the AI response to the question
+
+what I learnt
+To careful when printing the AI response and be specific 

@@ -1,0 +1,32 @@
+Program overview
+A small project that base your small local data you give it to answer your question 
+like a mini RAG project 😁
+
+Problem i encountered 
+Didn't know what to write as value to the key "prompt" in the dictionary "data"
+
+So i wrote something like :
+
+data ={
+    "model":"llama3.2",
+    "prompt":user_input + knowledge_text,
+    "stream": False
+
+}
+which made ollama answer in it own way and made it not to answer base on my local data and i said my definition are not hitting the point
+
+Solution and what I learnt 
+I found out that i had to create a prompt telling it what i actually want it to do 
+so i crate a variable also called prompt used f string and i wrote my prompt in it and give the key "prompt" a variable "prompt which contains my entire prompt the the code change to this:
+
+prompt = f"""
+Answer question based of the context been given , and lightly polish answer without adding too much info
+context={knowledge_text}
+Question={user_input}
+Answer:"""  
+
+data ={
+    "model": "llama3.2",
+    "prompt":prompt,
+    "stream":False
+} 
