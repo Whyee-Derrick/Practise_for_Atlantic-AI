@@ -1,0 +1,12 @@
+WHAT IS THE PROGRAM ABOUT
+This is a simple program that takes user questions and answer those questions based on my local data (Kaggle.csv) and if the question has no answer in my local data ollama answers using external data.
+
+PROBLEMS I ENCOUNTERED
+1. I forgot some of the little things i learnt which could help me built theis program.
+2. The mian problem i faced when doing this was trying to work with the variable i created to store my local data ;
+The 'with' function closes a file you are done reading  immediately you are done with it but i wanted to store what i'm reading into a variable called 'reader' and work with it throughout my code but the "with" function closed the the the file so i was facing errors like varible not defined.
+
+MY SOLUTION 
+1. I went back to my previouse code to learn  some little things i forgot about. 
+2. -I tried indenting the  entire code under the "with" function but that did'nt solve anything but rather made it was.
+-So learnt that i had to use the "list" function to store everything i'm reading from my csv file even before it the with function closed it.
