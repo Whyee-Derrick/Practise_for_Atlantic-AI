@@ -1,0 +1,9 @@
+PROGRAM OVERVIEW
+This is a small program that user streamlit interface , It accept audio input and displays the audio input 
+
+PROBLEM I FACED
+In trying to open the audio_file i used sr.AudioData intead of using sr.AudioFile
+with gave me some errors.
+
+SOLUTION
+I figured out and replaced audioData with audioFile 

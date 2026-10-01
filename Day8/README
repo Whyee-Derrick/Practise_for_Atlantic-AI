@@ -1,0 +1,9 @@
+WHAT MY PROGRAM IS ALL ABOUT ?
+My program in main.py is a program that answers questions based on the local file (maths.pdf) I gave it and it can remember previouse conversations and answer questions based on those conversations and it can also answer questions in general 
+
+PROBLEMS I ENCOUNTERED
+The main problem I faced today was an indentation problem 
+i place almost my entire code under a for loop by mistake and  when running my code I had alot of errors .
+
+SOLUTION 
+I quickly realized that problem and i tried indenting the code well and it worked.
