@@ -1,0 +1,10 @@
+PROGRAM OVERVIEW 
+This a program that allows you to upload files(pdf,txt) and display them to the user.
+
+PROBLEMS I ENCOUNTERED
+I didn't really encounter any problem since i  was just starting to learn it.
+
+WHAT I LEARNT 
+1. Handling file uploads in streamlit 
+2. Reading text and PDF files in python
+3. Displaying output with streamlit widgets
